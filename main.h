@@ -61,14 +61,11 @@ int execute(char **args, char **front);
 void free_list(list_t *head);
 char *_itoa(int num);
 
-<<<<<<< HEAD
 /* for the Input Helpers */
-=======
+
 int create_error(char **args, int err);
 void free_args(char **args, char **front);
 void free_env(void);
-
->>>>>>> aca310e251da100fef15f8d68cfc39564835efcd
 void handle_line(char **line, ssize_t read);
 void variable_replacement(char **args, int *exe_ret);
 char *get_args(char *line, int *exe_ret);
