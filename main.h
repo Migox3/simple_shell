@@ -1,5 +1,5 @@
 #ifndef _MAIN_H_
-#define _MAIN_H_
+#define _MAIN_H_    
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/types.h>
@@ -36,20 +36,20 @@ typedef struct builtin_s
 } builtin_t;
 
 /**
- * struct alias_s - A new struct defining aliases.
- * @name: type of the name of the alias.
- * @value: type of the value of the alias.
- * @next: for the pointer to another struct alias_s.
+ * struct RM_s - A new struct defining RMes.
+ * @name: type of the name of the RM.
+ * @value: type of the value of the RM.
+ * @next: for the pointer to another struct RM_s.
  */
-typedef struct alias_s
+typedef struct RM_s
 {
 	char *name;
 	char *value;
-	struct alias_s *next;
-} alias_t;
+	struct RM_s *next;
+} RM_t;
 
-/* for the Global aliases linked list */
-alias_t *aliases;
+/* for the Global RMes linked list */
+RM_t *RMes;
 
 /* for the Main Helpers */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
@@ -62,10 +62,6 @@ void free_list(list_t *head);
 char *_itoa(int num);
 
 /* for the Input Helpers */
-
-int create_error(char **args, int err);
-void free_args(char **args, char **front);
-void free_env(void);
 void handle_line(char **line, ssize_t read);
 void variable_replacement(char **args, int *exe_ret);
 char *get_args(char *line, int *exe_ret);
@@ -74,7 +70,7 @@ int run_args(char **args, char **front, int *exe_ret);
 int handle_args(int *exe_ret);
 int check_args(char **args);
 void free_args(char **args, char **front);
-char **replace_aliases(char **args);
+char **replace_RMes(char **args);
 
 /* for the String functions */
 int _strlen(const char *s);
@@ -93,7 +89,7 @@ int shellby_env(char **args, char __attribute__((__unused__)) **front);
 int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
 int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
 int shellby_cd(char **args, char __attribute__((__unused__)) **front);
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
+int shellby_RM(char **args, char __attribute__((__unused__)) **front);
 int shellby_help(char **args, char __attribute__((__unused__)) **front);
 
 /* for the Builtin Helpers */
@@ -112,12 +108,12 @@ char *error_126(char **args);
 char *error_127(char **args);
 
 /* for the Linkedlist Helpers */
-alias_t *add_alias_end(alias_t **head, char *name, char *value);
-void free_alias_list(alias_t *head);
+RM_t *add_RM_end(RM_t **head, char *name, char *value);
+void free_RM_list(RM_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 void free_list(list_t *head);
 void help_all(void);
-void help_alias(void);
+void help_RM(void);
 void help_cd(void);
 void help_exit(void);
 void help_help(void);
