@@ -50,6 +50,9 @@ int execute(char **args, char **front);
 void free_list(list_t *head);
 char *_itoa(int num);
 
+int create_error(char **args, int err);
+void free_args(char **args, char **front);
+void free_env(void);
 
 void handle_line(char **line, ssize_t read);
 void variable_replacement(char **args, int *exe_ret);
