@@ -59,11 +59,7 @@ int run_args(char **args, char **front, int *exe_ret);
 int handle_args(int *exe_ret);
 int check_args(char **args);
 void free_args(char **args, char **front);
-char **replace_aliases(char **args);
 
-
-
-void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 void free_list(list_t *head);
 
