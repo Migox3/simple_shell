@@ -1,5 +1,7 @@
 #include "main.h"
 
+void comd_exec(char *args[], char *prog_name);
+
 /**
  * comd_exec - Executes a command with arguments.
  * @args: An array of command-line arguments,
@@ -9,6 +11,7 @@
  */
 
 void comd_exec(char *args[], char *prog_name)
+
 {
 	int i;
 
@@ -29,4 +32,3 @@ void comd_exec(char *args[], char *prog_name)
 		path_exec(args, prog_name);
 	}
 }
-

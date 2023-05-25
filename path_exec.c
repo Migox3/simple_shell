@@ -8,10 +8,11 @@
  * @program_name: The name of the program .
  */
 
-void execPath(char *args[], char *program_name)
+void path_exec(char *args[], char *prog_name)
+
 {
 pid_t pid;
-char command_path[1024];
+char comd_path[1024];
 char *path = getenv("PATH");
 char *pathCopy = strdup(path);
 char *token, *p = pathCopy;
@@ -20,8 +21,8 @@ int cmd_exists = 0;
 while ((token = strtok(p, ":")) != NULL)
 {
 p = NULL;
-snprintf(command_path, sizeof(command_path), "%s/%s", token, args[0]);
-if (access(command_path, X_OK) == 0)
+snprintf(comd_path, sizeof(comd_path), "%s/%s", token, args[0]);
+if (access(comd_path, X_OK) == 0)
 {
 cmd_exists = 1;
 break;
@@ -30,7 +31,7 @@ break;
 free(pathCopy);
 if (!cmd_exists)
 {
-perror(program_name);
+perror(prog_name);
 return;
 }
 pid = fork();
@@ -41,8 +42,8 @@ exit(EXIT_FAILURE);
 }
 if (pid == 0)
 {
-execve(command_path, args, environ);
-perror(program_name);
+execve(comd_path, args, environ);
+perror(prog_name);
 exit(EXIT_FAILURE);
 }
 wait(NULL);

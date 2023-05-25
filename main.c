@@ -1,13 +1,14 @@
 #include "main.h"
 
-int check_exit(char *line);
-int check_cd(char **args);
+int checks_exit(char *line);
+int checks_cd(char **args);
+
 
 /**
- * main - A UNIX command_line interpreter.
+ * main - A UNIX command line interpreter.
  * @argc: argument count
  * @argv: argument vector storing the program name at 0 index
- * Return: 0 when it go well
+ * Return: 0 when it work
  */
 int main(int __attribute__((unused)) argc, char **argv)
 {
@@ -42,9 +43,9 @@ if (j > 0)
 args[0] = args[0];
 else
 args[0] = line;
-if (check_exit(line))
+if (checks_exit(line))
 break;
-if (check_cd(args))
+if (checks_cd(args))
 continue;
 comd_exec(args, argv[0]);
 }
@@ -53,21 +54,31 @@ exit(EXIT_SUCCESS);
 }
 
 /**
- * checker_exit - to checks if the user input is an exit command or no.
+ * checks_exit - to check if the user input is an exit command.
  * @line: Pointer to the user input string.
  * Return: 1 if the input is an exit command, 0 if not.
  */
-int checker_exit(char *line)
+int checks_exit(char *line)
 {
-return (checker_exit(line));
+size_t i;
+
+for (i = 0; i < 4; i++)
+{
+if (line[i] != "exit"[i])
+break;
+}
+if (i == 4 && line[4] == '\0')
+return (1);
+else
+return (0);
 }
 
 /**
- * check_cd - to checks if the user input is a cd command.
+ * checks_cd - to check if the user input is a cd command.
  * @args: An array of pointers to strings containing the user input.
  * Return: 1 if the input is a cd command, 0 if not.
  */
-int check_cd(char **args)
+int checks_cd(char **args)
 {
 if (strcmp(args[0], "cd") == 0)
 {
